@@ -161,7 +161,7 @@ function Header({ settings }: { settings: CafeSettings }) {
         <div className="flex items-center justify-between">
           {/* Logo & Name */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-amber-100 to-orange-100 shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
+            <div className="w-12 h-12 flex items-center justify-center overflow-hidden rounded-xl bg-white shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
               {settings.cafeLogo ? (
                 <img src={settings.cafeLogo} alt="Logo" className="w-10 h-10 object-contain" />
               ) : (
