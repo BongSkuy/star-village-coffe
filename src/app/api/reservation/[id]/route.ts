@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
+import { withAuth } from '@/lib/api-auth'
 
-// PUT - Update reservation
-export async function PUT(
+// PUT - Update reservation (Admin only)
+export const PUT = withAuth(async (
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
-) {
+) => {
   try {
     const { id } = await params
     const body = await request.json()
@@ -30,13 +31,13 @@ export async function PUT(
     console.error('Error updating reservation:', error)
     return NextResponse.json({ error: 'Gagal mengupdate reservasi' }, { status: 500 })
   }
-}
+})
 
-// DELETE - Delete reservation
-export async function DELETE(
+// DELETE - Delete reservation (Admin only)
+export const DELETE = withAuth(async (
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
-) {
+) => {
   try {
     const { id } = await params
 
@@ -49,4 +50,4 @@ export async function DELETE(
     console.error('Error deleting reservation:', error)
     return NextResponse.json({ error: 'Gagal menghapus reservasi' }, { status: 500 })
   }
-}
+})

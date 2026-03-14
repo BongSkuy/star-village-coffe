@@ -3,6 +3,7 @@ import { put, del } from '@vercel/blob'
 import { writeFile, unlink } from 'fs/promises'
 import path from 'path'
 import sharp from 'sharp'
+import { withAuth } from '@/lib/api-auth'
 
 // Check if running on Vercel
 const isVercel = process.env.VERCEL === '1'
@@ -71,8 +72,8 @@ async function makeTransparent(buffer: Buffer): Promise<Buffer> {
   }
 }
 
-// POST - Upload image
-export async function POST(request: NextRequest) {
+// POST - Upload image (Admin only)
+export const POST = withAuth(async (request: NextRequest) => {
   try {
     const formData = await request.formData()
     const file = formData.get('file') as File | null
@@ -177,10 +178,10 @@ export async function POST(request: NextRequest) {
     console.error('Error uploading file:', error)
     return NextResponse.json({ error: 'Gagal mengupload file' }, { status: 500 })
   }
-}
+})
 
-// DELETE - Delete image
-export async function DELETE(request: NextRequest) {
+// DELETE - Delete image (Admin only)
+export const DELETE = withAuth(async (request: NextRequest) => {
   try {
     const { searchParams } = new URL(request.url)
     const url = searchParams.get('url')
@@ -220,4 +221,4 @@ export async function DELETE(request: NextRequest) {
     console.error('Error deleting file:', error)
     return NextResponse.json({ error: 'Gagal menghapus file' }, { status: 500 })
   }
-}
+})
