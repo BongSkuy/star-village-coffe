@@ -77,6 +77,9 @@ export const PUT = withAuth(async (
         // Calculate points: 1 point per Rp 10.000
         const pointsToAdd = Math.floor((currentOrder.total * 1000) / 10000)
         
+        // Save points earned to order
+        updateData.loyaltyPointsEarned = pointsToAdd
+        
         if (pointsToAdd > 0 && currentOrder.customerPhone) {
           // Check if customer exists in loyalty
           const existingMember = await db.loyaltyMember.findUnique({

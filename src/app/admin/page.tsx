@@ -31,7 +31,7 @@ import {
   RefreshCw, Search, Menu, Gift, Settings,
   Calendar, Loader2, Copy, Lock, LogOut, Image as ImageIcon,
   Upload, Plus, X, Save, Edit, Coffee, GripVertical, Move,
-  CreditCard, Truck, MessageCircle, QrCode, Mail, User, Check, Phone, Home, TreePine, MapPin, AlertCircle, Bell
+  CreditCard, Truck, MessageCircle, QrCode, Mail, User, Check, Phone, Home, TreePine, MapPin, AlertCircle, Bell, Star
 } from 'lucide-react'
 
 // Types
@@ -129,6 +129,17 @@ interface GalleryImage {
   isActive: boolean
 }
 
+interface LoyaltyMember {
+  id: string
+  name: string
+  phone: string
+  email: string | null
+  points: number
+  level: string
+  totalSpent: number
+  createdAt: string
+}
+
 interface CafeSettings {
   cafe_name?: { value: string; description: string }
   cafe_tagline?: { value: string; description: string }
@@ -196,6 +207,7 @@ export default function AdminDashboard() {
   const [reservations, setReservations] = useState<Reservation[]>([])
   const [settings, setSettings] = useState<CafeSettings>({})
   const [gallery, setGallery] = useState<GalleryImage[]>([])
+  const [loyaltyMembers, setLoyaltyMembers] = useState<LoyaltyMember[]>([])
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('overview')
   
@@ -203,6 +215,7 @@ export default function AdminDashboard() {
   const [orderStatus, setOrderStatus] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [reservationFilter, setReservationFilter] = useState('all')
+  const [loyaltyPhoneFilter, setLoyaltyPhoneFilter] = useState('')
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null)
   
   // Analytics state
@@ -351,7 +364,7 @@ export default function AdminDashboard() {
     
     async function fetchData() {
       try {
-        const [ordersRes, menuRes, catRes, promosRes, reservationsRes, settingsRes, galleryRes, deliveryRes] = await Promise.all([
+        const [ordersRes, menuRes, catRes, promosRes, reservationsRes, settingsRes, galleryRes, deliveryRes, loyaltyRes] = await Promise.all([
           fetch('/api/orders'),
           fetch('/api/menu'),
           fetch('/api/categories'),
@@ -360,6 +373,7 @@ export default function AdminDashboard() {
           fetch('/api/settings'),
           fetch('/api/gallery'),
           fetch('/api/delivery'),
+          fetch('/api/loyalty?admin=true'),
         ])
         
         if (ordersRes.ok) {
@@ -434,6 +448,11 @@ export default function AdminDashboard() {
         if (deliveryRes.ok) {
           const data = await deliveryRes.json()
           setDeliveryZones(data.zones || [])
+        }
+        
+        if (loyaltyRes.ok) {
+          const data = await loyaltyRes.json()
+          setLoyaltyMembers(data.members || [])
         }
       } catch (error) {
         console.error('Error fetching data:', error)
@@ -1403,7 +1422,7 @@ https://wa.me/${settings.cafe_phone?.value || '6282148615641'}`
         }
       } else {
         const data = await response.json()
-        alert(data.error || 'Gagal menyimpan promo')
+        alert(data.message || data.error || 'Gagal menyimpan promo')
       }
     } catch (error) {
       console.error('Error saving promo:', error)
@@ -1625,7 +1644,7 @@ https://wa.me/${settings.cafe_phone?.value || '6282148615641'}`
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-8 mb-6">
+          <TabsList className="grid w-full grid-cols-9 mb-6">
             <TabsTrigger value="overview" className="gap-2">
               <TrendingUp className="w-4 h-4" />
               <span className="hidden sm:inline">Overview</span>
@@ -1653,6 +1672,10 @@ https://wa.me/${settings.cafe_phone?.value || '6282148615641'}`
             <TabsTrigger value="gallery" className="gap-2">
               <ImageIcon className="w-4 h-4" />
               <span className="hidden sm:inline">Gallery</span>
+            </TabsTrigger>
+            <TabsTrigger value="loyalty" className="gap-2">
+              <Star className="w-4 h-4" />
+              <span className="hidden sm:inline">Loyalty</span>
             </TabsTrigger>
             <TabsTrigger value="settings" className="gap-2">
               <Settings className="w-4 h-4" />
@@ -3904,6 +3927,112 @@ https://wa.me/${settings.cafe_phone?.value || '6282148615641'}`
                       ))}
                     </div>
                   </>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          {/* Loyalty Tab */}
+          <TabsContent value="loyalty">
+            <Card>
+              <CardHeader>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <CardTitle className="flex items-center gap-2">
+                      <Star className="w-5 h-5" />
+                      Member Loyalty ({loyaltyMembers.length})
+                    </CardTitle>
+                    <CardDescription>Kelola member loyalty dan poin</CardDescription>
+                  </div>
+                  {/* Phone Filter */}
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      placeholder="Cari nomor telepon..."
+                      value={loyaltyPhoneFilter}
+                      onChange={(e) => setLoyaltyPhoneFilter(e.target.value)}
+                      className="pl-10 w-64"
+                    />
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {loyaltyMembers.length === 0 ? (
+                  <div className="text-center py-12">
+                    <Star className="w-12 h-12 mx-auto text-muted-foreground/50 mb-4" />
+                    <p className="text-muted-foreground">Belum ada member loyalty</p>
+                    <p className="text-sm text-muted-foreground mt-1">Member akan ditambahkan otomatis saat customer melakukan pemesanan</p>
+                  </div>
+                ) : (
+                  <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                    {loyaltyMembers
+                      .filter(member => !loyaltyPhoneFilter || member.phone.includes(loyaltyPhoneFilter))
+                      .map((member) => {
+                        // Level badge colors
+                        const levelColors: Record<string, string> = {
+                          bronze: 'bg-amber-700 text-white',
+                          silver: 'bg-gray-400 text-white',
+                          gold: 'bg-yellow-500 text-white',
+                          platinum: 'bg-blue-500 text-white',
+                        }
+                        const levelLabels: Record<string, string> = {
+                          bronze: 'Bronze',
+                          silver: 'Silver',
+                          gold: 'Gold',
+                          platinum: 'Platinum',
+                        }
+                        
+                        return (
+                          <div key={member.id} className="p-4 bg-secondary/30 rounded-xl border border-border">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                              <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                                  <User className="w-6 h-6 text-primary" />
+                                </div>
+                                <div>
+                                  <p className="font-semibold">{member.name}</p>
+                                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                    <Phone className="w-3 h-3" />
+                                    <a href={`tel:${member.phone}`} className="hover:text-primary">{member.phone}</a>
+                                    {member.email && (
+                                      <>
+                                        <span className="mx-1">•</span>
+                                        <Mail className="w-3 h-3" />
+                                        <span>{member.email}</span>
+                                      </>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-4">
+                                <div className="text-right">
+                                  <div className="flex items-center gap-2">
+                                    <Star className="w-4 h-4 text-amber-500" />
+                                    <span className="font-bold text-lg">{member.points}</span>
+                                    <span className="text-sm text-muted-foreground">poin</span>
+                                  </div>
+                                  <p className="text-sm text-muted-foreground">
+                                    Total belanja: {formatPrice(member.totalSpent)}
+                                  </p>
+                                </div>
+                                <Badge className={`${levelColors[member.level] || 'bg-gray-500 text-white'} px-3 py-1`}>
+                                  {levelLabels[member.level] || member.level}
+                                </Badge>
+                              </div>
+                            </div>
+                            <div className="mt-3 pt-3 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
+                              <span>Bergabung: {formatDate(member.createdAt)}</span>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    {loyaltyMembers.filter(member => !loyaltyPhoneFilter || member.phone.includes(loyaltyPhoneFilter)).length === 0 && loyaltyPhoneFilter && (
+                      <div className="text-center py-8">
+                        <Search className="w-8 h-8 mx-auto text-muted-foreground/50 mb-2" />
+                        <p className="text-muted-foreground">Tidak ada member dengan nomor telepon tersebut</p>
+                      </div>
+                    )}
+                  </div>
                 )}
               </CardContent>
             </Card>
