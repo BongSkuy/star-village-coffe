@@ -1644,44 +1644,57 @@ https://wa.me/${settings.cafe_phone?.value || '6282148615641'}`
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-9 mb-6">
-            <TabsTrigger value="overview" className="gap-2">
-              <TrendingUp className="w-4 h-4" />
-              <span className="hidden sm:inline">Overview</span>
-            </TabsTrigger>
-            <TabsTrigger value="orders" className="gap-2">
-              <ShoppingCart className="w-4 h-4" />
-              <span className="hidden sm:inline">Orders</span>
-            </TabsTrigger>
-            <TabsTrigger value="analytics" className="gap-2">
-              <DollarSign className="w-4 h-4" />
-              <span className="hidden sm:inline">Analisis</span>
-            </TabsTrigger>
-            <TabsTrigger value="menu" className="gap-2">
-              <Menu className="w-4 h-4" />
-              <span className="hidden sm:inline">Menu</span>
-            </TabsTrigger>
-            <TabsTrigger value="promos" className="gap-2">
-              <Gift className="w-4 h-4" />
-              <span className="hidden sm:inline">Promo</span>
-            </TabsTrigger>
-            <TabsTrigger value="reservations" className="gap-2">
-              <Calendar className="w-4 h-4" />
-              <span className="hidden sm:inline">Reservasi</span>
-            </TabsTrigger>
-            <TabsTrigger value="gallery" className="gap-2">
-              <ImageIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Gallery</span>
-            </TabsTrigger>
-            <TabsTrigger value="loyalty" className="gap-2">
-              <Star className="w-4 h-4" />
-              <span className="hidden sm:inline">Loyalty</span>
-            </TabsTrigger>
-            <TabsTrigger value="settings" className="gap-2">
-              <Settings className="w-4 h-4" />
-              <span className="hidden sm:inline">Settings</span>
-            </TabsTrigger>
-          </TabsList>
+          {/* Sticky TabsList wrapper */}
+          <div className="sticky top-[73px] z-40 bg-background/95 backdrop-blur-sm -mx-4 px-4 py-2 border-b">
+            <TabsList className="grid w-full grid-cols-9">
+              <TabsTrigger value="overview" className="gap-2">
+                <TrendingUp className="w-4 h-4" />
+                <span className="hidden sm:inline">Overview</span>
+              </TabsTrigger>
+              <TabsTrigger value="orders" className="gap-2">
+                <ShoppingCart className="w-4 h-4" />
+                <span className="hidden sm:inline">Orders</span>
+                {pendingOrders.length > 0 && (
+                  <Badge className="ml-1 bg-yellow-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center">
+                    {pendingOrders.length}
+                  </Badge>
+                )}
+              </TabsTrigger>
+              <TabsTrigger value="analytics" className="gap-2">
+                <DollarSign className="w-4 h-4" />
+                <span className="hidden sm:inline">Analisis</span>
+              </TabsTrigger>
+              <TabsTrigger value="menu" className="gap-2">
+                <Menu className="w-4 h-4" />
+                <span className="hidden sm:inline">Menu</span>
+              </TabsTrigger>
+              <TabsTrigger value="promos" className="gap-2">
+                <Gift className="w-4 h-4" />
+                <span className="hidden sm:inline">Promo</span>
+              </TabsTrigger>
+              <TabsTrigger value="reservations" className="gap-2">
+                <Calendar className="w-4 h-4" />
+                <span className="hidden sm:inline">Reservasi</span>
+                {reservations.filter(r => r.status === 'pending').length > 0 && (
+                  <Badge className="ml-1 bg-yellow-500 text-white text-xs px-1.5 py-0.5 min-w-[20px] h-5 flex items-center justify-center">
+                    {reservations.filter(r => r.status === 'pending').length}
+                  </Badge>
+                )}
+              </TabsTrigger>
+              <TabsTrigger value="gallery" className="gap-2">
+                <ImageIcon className="w-4 h-4" />
+                <span className="hidden sm:inline">Gallery</span>
+              </TabsTrigger>
+              <TabsTrigger value="loyalty" className="gap-2">
+                <Star className="w-4 h-4" />
+                <span className="hidden sm:inline">Loyalty</span>
+              </TabsTrigger>
+              <TabsTrigger value="settings" className="gap-2">
+                <Settings className="w-4 h-4" />
+                <span className="hidden sm:inline">Settings</span>
+              </TabsTrigger>
+            </TabsList>
+          </div>
           
           {/* Overview Tab */}
           <TabsContent value="overview">

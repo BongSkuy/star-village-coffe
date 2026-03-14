@@ -617,6 +617,59 @@ function MenuPage() {
           <p className="text-muted-foreground">Pilih menu favorit Anda</p>
         </div>
 
+        {/* Cara Order Section */}
+        <Card className="mb-8 border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 shadow-lg">
+          <CardContent className="p-6">
+            <div className="flex flex-col md:flex-row md:items-center gap-6">
+              <div className="flex-1">
+                <Badge className="mb-2 bg-amber-100 text-amber-800">Panduan</Badge>
+                <h2 className="text-xl font-bold mb-4">Cara Memesan</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">1</div>
+                    <div>
+                      <p className="font-medium text-sm">Pilih Menu</p>
+                      <p className="text-xs text-muted-foreground">Browse menu favorit</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">2</div>
+                    <div>
+                      <p className="font-medium text-sm">Kustomisasi</p>
+                      <p className="text-xs text-muted-foreground">Pilih varian & qty</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">3</div>
+                    <div>
+                      <p className="font-medium text-sm">Checkout</p>
+                      <p className="text-xs text-muted-foreground">Isi data & bayar</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center text-sm font-bold shrink-0">4</div>
+                    <div>
+                      <p className="font-medium text-sm">Selesai</p>
+                      <p className="text-xs text-muted-foreground">Ambil/Terima order</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="md:w-auto md:border-l md:border-amber-200 md:pl-6">
+                <div className="flex items-center gap-3 p-4 bg-white/70 rounded-xl border border-amber-100">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-sm">Bingung pilih menu?</p>
+                    <p className="text-xs text-muted-foreground">Coba AI Menu Assistant!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Search */}
         <div className="max-w-md mx-auto mb-8">
           <div className="relative">

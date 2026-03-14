@@ -157,6 +157,7 @@ function Header({ settings }: { settings: CafeSettings }) {
             <Link href="/" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Home</Link>
             <Link href="/#tentang" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Tentang</Link>
             <Link href="/menu" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Menu</Link>
+            <Link href="/loyalty" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Loyalty</Link>
             <Link href="/gallery" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Gallery</Link>
             <Link href="/reservasi" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Reservasi</Link>
             <Link href="/#lokasi" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Lokasi</Link>
@@ -185,6 +186,7 @@ function Header({ settings }: { settings: CafeSettings }) {
             <Link href="/" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</Link>
             <Link href="/#tentang" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Tentang</Link>
             <Link href="/menu" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Menu</Link>
+            <Link href="/loyalty" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Loyalty</Link>
             <Link href="/gallery" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Gallery</Link>
             <Link href="/reservasi" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Reservasi</Link>
             <Link href="/#lokasi" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Lokasi</Link>
@@ -427,139 +429,6 @@ function AboutSection({ settings }: { settings: CafeSettings }) {
               </Card>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// How to Order & Reservation Section
-function HowToSection() {
-  const orderSteps = [
-    {
-      icon: <Utensils className="w-6 h-6" />,
-      title: 'Pilih Menu',
-      description: 'Lihat menu dan pilih minuman atau makanan favorit Anda'
-    },
-    {
-      icon: <Sparkles className="w-6 h-6" />,
-      title: 'Kustomisasi',
-      description: 'Pilih varian, ukuran, dan tambahan sesuai selera'
-    },
-    {
-      icon: <MessageCircle className="w-6 h-6" />,
-      title: 'Checkout',
-      description: 'Masukkan data diri dan pilih metode pembayaran'
-    },
-    {
-      icon: <Check className="w-6 h-6" />,
-      title: 'Selesai',
-      description: 'Ambil pesanan di cafe atau kami antar ke lokasi Anda'
-    }
-  ]
-
-  const reservationSteps = [
-    {
-      icon: <Calendar className="w-6 h-6" />,
-      title: 'Pilih Tanggal',
-      description: 'Tentukan tanggal dan waktu kunjungan Anda'
-    },
-    {
-      icon: <Users className="w-6 h-6" />,
-      title: 'Jumlah Tamu',
-      description: 'Isi jumlah tamu dan pilih tempat duduk (indoor/outdoor)'
-    },
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: 'Isi Data',
-      description: 'Masukkan nama dan nomor telepon untuk konfirmasi'
-    },
-    {
-      icon: <Check className="w-6 h-6" />,
-      title: 'Konfirmasi',
-      description: 'Tim kami akan menghubungi Anda untuk konfirmasi'
-    }
-  ]
-
-  return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <Badge className="mb-4 bg-amber-100 text-amber-800">Panduan</Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Cara Memesan</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Mudah dan cepat! Ikuti langkah-langkah berikut untuk memesan menu atau reservasi meja
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* How to Order */}
-          <Card className="border-0 shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-amber-500 to-amber-600 p-6 text-white">
-              <h3 className="text-xl font-bold flex items-center gap-2">
-                <Utensils className="w-6 h-6" />
-                Cara Order Menu
-              </h3>
-              <p className="text-white/90 text-sm mt-1">Pesan makanan & minuman dengan mudah</p>
-            </div>
-            <CardContent className="p-6">
-              <div className="space-y-4">
-                {orderSteps.map((step, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 shrink-0 font-bold">
-                      {index + 1}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-semibold">{step.title}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{step.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <Link href="/menu" className="block mt-6">
-                <Button className="w-full bg-amber-600 hover:bg-amber-700">
-                  Pesan Sekarang
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          {/* How to Reservation */}
-          <Card className="border-0 shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6 text-white">
-              <h3 className="text-xl font-bold flex items-center gap-2">
-                <Calendar className="w-6 h-6" />
-                Cara Reservasi
-              </h3>
-              <p className="text-white/90 text-sm mt-1">Pesan meja untuk pengalaman lebih nyaman</p>
-            </div>
-            <CardContent className="p-6">
-              <div className="space-y-4">
-                {reservationSteps.map((step, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-700 shrink-0 font-bold">
-                      {index + 1}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-semibold">{step.title}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{step.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <Link href="/reservasi" className="block mt-6">
-                <Button className="w-full bg-orange-600 hover:bg-orange-700">
-                  Reservasi Sekarang
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </section>
@@ -1409,6 +1278,7 @@ function Footer({ settings }: { settings: CafeSettings }) {
             <ul className="space-y-2 text-sm opacity-75">
               <li><Link href="/" className="hover:opacity-100 transition-opacity">Home</Link></li>
               <li><Link href="/menu" className="hover:opacity-100 transition-opacity">Menu</Link></li>
+              <li><Link href="/loyalty" className="hover:opacity-100 transition-opacity">Loyalty</Link></li>
               <li><Link href="/gallery" className="hover:opacity-100 transition-opacity">Gallery</Link></li>
               <li><Link href="/reservasi" className="hover:opacity-100 transition-opacity">Reservasi</Link></li>
             </ul>
@@ -1525,7 +1395,6 @@ function HomePage() {
       <Header settings={settings} />
       <HeroSection settings={settings} />
       <AboutSection settings={settings} />
-      <HowToSection />
       <FeaturedMenuSection categories={categories} />
       <ReservationSection settings={settings} />
       <GalleryPreviewSection images={gallery} />

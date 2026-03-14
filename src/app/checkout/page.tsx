@@ -225,9 +225,9 @@ function CheckoutPage() {
       })
       
       const data = await res.json()
-      if (data.valid) {
-        setPromoDiscount(data.discount)
-        alert(`Kode promo berhasil! Diskon ${data.discount}%`)
+      if (data.valid && data.promo) {
+        setPromoDiscount(data.promo.discount)
+        alert(`Kode promo berhasil! Diskon ${data.promo.discount}%`)
       } else {
         alert(data.error || 'Kode promo tidak valid')
         setPromoDiscount(0)

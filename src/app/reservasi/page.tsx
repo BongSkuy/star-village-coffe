@@ -189,6 +189,44 @@ export default function ReservasiPage() {
             </p>
           </div>
 
+          {/* Cara Reservasi Section */}
+          <Card className="mb-8 border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 shadow-lg">
+            <CardContent className="p-6">
+              <Badge className="mb-2 bg-amber-100 text-amber-800">Panduan</Badge>
+              <h2 className="text-xl font-bold mb-4">Cara Reservasi</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">1</div>
+                  <div>
+                    <p className="font-medium text-sm">Pilih Tanggal</p>
+                    <p className="text-xs text-muted-foreground">Tentukan hari kunjungan</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">2</div>
+                  <div>
+                    <p className="font-medium text-sm">Jumlah Tamu</p>
+                    <p className="text-xs text-muted-foreground">Sesuaikan kebutuhan</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">3</div>
+                  <div>
+                    <p className="font-medium text-sm">Isi Data</p>
+                    <p className="text-xs text-muted-foreground">Lengkapi informasi</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center text-sm font-bold shrink-0">4</div>
+                  <div>
+                    <p className="font-medium text-sm">Konfirmasi</p>
+                    <p className="text-xs text-muted-foreground">Tunggu kabar kami</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {success && reservationResult ? (
             <Card className="border-0 shadow-2xl overflow-hidden">
               <CardContent className="p-0">
