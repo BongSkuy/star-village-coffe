@@ -189,38 +189,117 @@ export default function ReservasiPage() {
             </p>
           </div>
 
-          {/* Cara Reservasi Section */}
-          <Card className="mb-8 border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 shadow-lg">
-            <CardContent className="p-6">
-              <Badge className="mb-2 bg-amber-100 text-amber-800">Panduan</Badge>
-              <h2 className="text-xl font-bold mb-4">Cara Reservasi</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">1</div>
+          {/* Cara Reservasi Section - Enhanced Design */}
+          <Card className="mb-10 border-0 shadow-xl overflow-hidden">
+            <CardContent className="p-0">
+              {/* Header */}
+              <div className="bg-gradient-to-r from-amber-600 to-orange-600 px-6 py-4 text-white">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                    <Calendar className="w-5 h-5" />
+                  </div>
                   <div>
-                    <p className="font-medium text-sm">Pilih Tanggal</p>
-                    <p className="text-xs text-muted-foreground">Tentukan hari kunjungan</p>
+                    <h2 className="text-xl font-bold">Cara Reservasi Meja</h2>
+                    <p className="text-white/80 text-sm">Pesan tempat favoritmu dengan mudah!</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">2</div>
-                  <div>
-                    <p className="font-medium text-sm">Jumlah Tamu</p>
-                    <p className="text-xs text-muted-foreground">Sesuaikan kebutuhan</p>
+              </div>
+              
+              {/* Steps */}
+              <div className="p-6 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {/* Step 1 */}
+                  <div className="relative group">
+                    <div className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 h-full">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                          1
+                        </div>
+                        <div>
+                          <p className="font-bold text-gray-800">Pilih Tanggal</p>
+                          <p className="text-xs text-muted-foreground">Tentukan hari</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        Pilih <span className="font-medium text-amber-700">tanggal kunjungan</span> Anda. Reservasi bisa dilakukan maksimal H-1 sebelum kunjungan.
+                      </p>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-amber-200 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-300" />
+                    </div>
+                  </div>
+                  
+                  {/* Step 2 */}
+                  <div className="relative group">
+                    <div className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 h-full">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                          2
+                        </div>
+                        <div>
+                          <p className="font-bold text-gray-800">Waktu & Tamu</p>
+                          <p className="text-xs text-muted-foreground">Sesuaikan kebutuhan</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        Tentukan <span className="font-medium text-orange-700">waktu kedatangan</span> dan jumlah tamu. Pilih area Indoor (AC) atau Outdoor (taman).
+                      </p>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-orange-200 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-300" />
+                    </div>
+                  </div>
+                  
+                  {/* Step 3 */}
+                  <div className="relative group">
+                    <div className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 h-full">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                          3
+                        </div>
+                        <div>
+                          <p className="font-bold text-gray-800">Isi Data</p>
+                          <p className="text-xs text-muted-foreground">Lengkapi informasi</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        Lengkapi <span className="font-medium text-purple-700">nama & nomor HP</span>. Kami akan menghubungi Anda untuk konfirmasi reservasi.
+                      </p>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-purple-200 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-300" />
+                    </div>
+                  </div>
+                  
+                  {/* Step 4 */}
+                  <div className="relative group">
+                    <div className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-green-100 h-full">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                          4
+                        </div>
+                        <div>
+                          <p className="font-bold text-gray-800">Konfirmasi</p>
+                          <p className="text-xs text-muted-foreground">Tunggu kabar</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        Simpan <span className="font-medium text-green-700">kode reservasi</span> Anda. Gunakan untuk melacak status dan datang tepat waktu!
+                      </p>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-200 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-300" />
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">3</div>
-                  <div>
-                    <p className="font-medium text-sm">Isi Data</p>
-                    <p className="text-xs text-muted-foreground">Lengkapi informasi</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center text-sm font-bold shrink-0">4</div>
-                  <div>
-                    <p className="font-medium text-sm">Konfirmasi</p>
-                    <p className="text-xs text-muted-foreground">Tunggu kabar kami</p>
+                
+                {/* Tips Card */}
+                <div className="mt-6 p-4 bg-white rounded-xl border border-amber-200 shadow-sm">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                      <AlertCircle className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-blue-800 mb-1">Tips Reservasi</p>
+                      <ul className="text-sm text-blue-700 space-y-1">
+                        <li>• Reservasi paling lambat H-1 sebelum kunjungan</li>
+                        <li>• Datang 10-15 menit lebih awal</li>
+                        <li>• Konfirmasi akan dikirim via WhatsApp</li>
+                        <li>• Bisa lacak status dengan kode reservasi</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

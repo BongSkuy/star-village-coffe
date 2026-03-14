@@ -617,58 +617,138 @@ function MenuPage() {
           <p className="text-muted-foreground">Pilih menu favorit Anda</p>
         </div>
 
-        {/* Cara Order Section */}
-        <Card className="mb-8 border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 shadow-lg">
-          <CardContent className="p-6">
-            <div className="flex flex-col md:flex-row md:items-center gap-6">
-              <div className="flex-1">
-                <Badge className="mb-2 bg-amber-100 text-amber-800">Panduan</Badge>
-                <h2 className="text-xl font-bold mb-4">Cara Memesan</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">1</div>
-                    <div>
-                      <p className="font-medium text-sm">Pilih Menu</p>
-                      <p className="text-xs text-muted-foreground">Browse menu favorit</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">2</div>
-                    <div>
-                      <p className="font-medium text-sm">Kustomisasi</p>
-                      <p className="text-xs text-muted-foreground">Pilih varian & qty</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0">3</div>
-                    <div>
-                      <p className="font-medium text-sm">Checkout</p>
-                      <p className="text-xs text-muted-foreground">Isi data & bayar</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center text-sm font-bold shrink-0">4</div>
-                    <div>
-                      <p className="font-medium text-sm">Selesai</p>
-                      <p className="text-xs text-muted-foreground">Ambil/Terima order</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="md:w-auto md:border-l md:border-amber-200 md:pl-6">
-                <div className="flex items-center gap-3 p-4 bg-white/70 rounded-xl border border-amber-100">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                    <Bot className="w-5 h-5 text-white" />
+        {/* Cara Order Section - Enhanced Design */}
+        <div className="mb-10">
+          {/* Main Guide Card */}
+          <Card className="border-0 shadow-xl overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+            <CardContent className="p-0">
+              {/* Header with gradient */}
+              <div className="bg-gradient-to-r from-amber-600 to-orange-600 px-6 py-4 text-white">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                    <Utensils className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="font-medium text-sm">Bingung pilih menu?</p>
-                    <p className="text-xs text-muted-foreground">Coba AI Menu Assistant!</p>
+                    <h2 className="text-xl font-bold">Cara Memesan di Star Village</h2>
+                    <p className="text-white/80 text-sm">Mudah, cepat, dan praktis!</p>
                   </div>
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+              
+              {/* Steps */}
+              <div className="p-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {/* Step 1 */}
+                  <div className="relative group">
+                    <div className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 h-full">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                          1
+                        </div>
+                        <div>
+                          <p className="font-bold text-gray-800">Pilih Menu</p>
+                          <p className="text-xs text-muted-foreground">Browse & cari</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        Jelajahi menu favorit Anda. Gunakan <span className="font-medium text-amber-700">pencarian</span> atau filter kategori untuk menemukan menu yang diinginkan.
+                      </p>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-amber-200 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-300" />
+                    </div>
+                  </div>
+                  
+                  {/* Step 2 */}
+                  <div className="relative group">
+                    <div className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 h-full">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                          2
+                        </div>
+                        <div>
+                          <p className="font-bold text-gray-800">Kustomisasi</p>
+                          <p className="text-xs text-muted-foreground">Varian & jumlah</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        Pilih <span className="font-medium text-orange-700">ukuran, varian</span> yang diinginkan, atur jumlah, lalu tambahkan ke keranjang belanja.
+                      </p>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-orange-200 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-300" />
+                    </div>
+                  </div>
+                  
+                  {/* Step 3 */}
+                  <div className="relative group">
+                    <div className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 h-full">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                          3
+                        </div>
+                        <div>
+                          <p className="font-bold text-gray-800">Checkout</p>
+                          <p className="text-xs text-muted-foreground">Isi data & bayar</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        Lengkapi data pengambilan, pilih <span className="font-medium text-purple-700">metode pembayaran</span>, dan gunakan kode promo jika ada.
+                      </p>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-purple-200 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-300" />
+                    </div>
+                  </div>
+                  
+                  {/* Step 4 */}
+                  <div className="relative group">
+                    <div className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-green-100 h-full">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                          4
+                        </div>
+                        <div>
+                          <p className="font-bold text-gray-800">Selesai!</p>
+                          <p className="text-xs text-muted-foreground">Ambil order</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        Terima <span className="font-medium text-green-700">notifikasi WhatsApp</span>, tunggu pesanan diproses, dan ambil di cafe atau terima delivery!
+                      </p>
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-200 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-300" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          {/* AI Assistant Promo Card */}
+          <Card className="mt-4 border-0 shadow-lg overflow-hidden bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700">
+            <CardContent className="p-0">
+              <div className="flex flex-col sm:flex-row items-center gap-4 p-5">
+                <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                  <Bot className="w-8 h-8 text-white" />
+                </div>
+                <div className="flex-1 text-center sm:text-left">
+                  <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
+                    <Sparkles className="w-4 h-4 text-yellow-300" />
+                    <span className="text-white/80 text-xs font-medium uppercase tracking-wider">Fitur Baru</span>
+                    <Sparkles className="w-4 h-4 text-yellow-300" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-1">AI Menu Assistant</h3>
+                  <p className="text-white/90 text-sm">
+                    Bingung pilih menu? Ceritakan suasana hatimu dan AI kami akan rekomendasikan menu yang cocok! 
+                    Klik tombol <span className="font-medium text-yellow-300">"Bingung Pilih? 🤔"</span> di bawah kanan layar.
+                  </p>
+                </div>
+                <div className="hidden md:block flex-shrink-0">
+                  <div className="w-32 h-20 bg-white/10 rounded-xl flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-2xl mb-1">🤖</div>
+                      <p className="text-xs text-white/80">AI Powered</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Search */}
         <div className="max-w-md mx-auto mb-8">

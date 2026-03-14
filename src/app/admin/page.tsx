@@ -335,19 +335,21 @@ export default function AdminDashboard() {
   }[]>([])
   const [savingZones, setSavingZones] = useState(false)
   
-  // Check auth on mount - verify admin session cookie
+  // Check auth on mount - verify admin session via API
   useEffect(() => {
     async function checkSession() {
       try {
-        // Check if admin_session cookie exists
-        const hasSession = document.cookie.includes('admin_session=')
-        if (hasSession) {
+        // Use verify-session API to check httpOnly cookie
+        const response = await fetch('/api/admin/verify-session')
+        const data = await response.json()
+        
+        if (data.authenticated) {
           setIsAuthenticated(true)
         } else {
           // Also check NextAuth session as fallback
-          const response = await fetch('/api/auth/session')
-          const data = await response.json()
-          if (data?.user) {
+          const authResponse = await fetch('/api/auth/session')
+          const authData = await authResponse.json()
+          if (authData?.user) {
             setIsAuthenticated(true)
           }
         }
