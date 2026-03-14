@@ -14,7 +14,7 @@ import {
   MessageCircle, Navigation, Star, ArrowRight,
   Wifi, Power, Gamepad2, Building, Heart, Users,
   Award, Check, Move, Calendar, Loader2, Home, TreePine, User, Copy,
-  Menu, X, Gift, Image, MapPinned, Info
+  Menu, X, Gift, Image as ImageIcon, MapPinned, Info
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -141,7 +141,7 @@ function Header({ settings }: { settings: CafeSettings }) {
     { name: 'Tentang', href: '/#tentang', icon: <Info className="w-4 h-4" /> },
     { name: 'Menu', href: '/menu', icon: <Utensils className="w-4 h-4" /> },
     { name: 'Loyalty', href: '/loyalty', icon: <Gift className="w-4 h-4" /> },
-    { name: 'Gallery', href: '/gallery', icon: <Image className="w-4 h-4" /> },
+    { name: 'Gallery', href: '/gallery', icon: <ImageIcon className="w-4 h-4" /> },
     { name: 'Reservasi', href: '/reservasi', icon: <Calendar className="w-4 h-4" /> },
     { name: 'Lokasi', href: '/#lokasi', icon: <MapPin className="w-4 h-4" /> },
   ]
