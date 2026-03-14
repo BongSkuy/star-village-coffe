@@ -13,7 +13,8 @@ import {
   Clock, Phone, Instagram, ChevronDown,
   MessageCircle, Navigation, Star, ArrowRight,
   Wifi, Power, Gamepad2, Building, Heart, Users,
-  Award, Check, Move, Calendar, Loader2, Home, TreePine, User, Copy
+  Award, Check, Move, Calendar, Loader2, Home, TreePine, User, Copy,
+  Menu, X, Gift, Image, MapPinned, Info
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -132,14 +133,35 @@ function StatusBadge({ openHour, closeHour }: { openHour: number; closeHour: num
 // Header Component
 function Header({ settings }: { settings: CafeSettings }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // Navigation items with icons
+  const navItems = [
+    { name: 'Home', href: '/', icon: <Home className="w-4 h-4" /> },
+    { name: 'Tentang', href: '/#tentang', icon: <Info className="w-4 h-4" /> },
+    { name: 'Menu', href: '/menu', icon: <Utensils className="w-4 h-4" /> },
+    { name: 'Loyalty', href: '/loyalty', icon: <Gift className="w-4 h-4" /> },
+    { name: 'Gallery', href: '/gallery', icon: <Image className="w-4 h-4" /> },
+    { name: 'Reservasi', href: '/reservasi', icon: <Calendar className="w-4 h-4" /> },
+    { name: 'Lokasi', href: '/#lokasi', icon: <MapPin className="w-4 h-4" /> },
+  ]
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white shadow-md'}`}>
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo & Name */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 flex items-center justify-center overflow-hidden rounded-xl bg-white shadow-md group-hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-amber-100 to-orange-100 shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
               {settings.cafeLogo ? (
                 <img src={settings.cafeLogo} alt="Logo" className="w-10 h-10 object-contain" />
               ) : (
@@ -147,20 +169,23 @@ function Header({ settings }: { settings: CafeSettings }) {
               )}
             </div>
             <div className="hidden sm:block">
-              <h1 className="font-bold text-lg leading-tight text-gray-900">{settings.cafeName}</h1>
+              <h1 className="font-bold text-lg leading-tight text-gray-900 group-hover:text-amber-700 transition-colors">{settings.cafeName}</h1>
               <p className="text-xs text-gray-500">{settings.cafeTagline}</p>
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            <Link href="/" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Home</Link>
-            <Link href="/#tentang" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Tentang</Link>
-            <Link href="/menu" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Menu</Link>
-            <Link href="/loyalty" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Loyalty</Link>
-            <Link href="/gallery" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Gallery</Link>
-            <Link href="/reservasi" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Reservasi</Link>
-            <Link href="/#lokasi" className="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-amber-100 transition-colors">Lokasi</Link>
+          {/* Desktop Nav - Modern Pill Style */}
+          <nav className="hidden lg:flex items-center bg-gray-50/80 backdrop-blur-sm rounded-full p-1.5 shadow-inner">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="group relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 rounded-full transition-all duration-300 hover:bg-white hover:text-amber-700 hover:shadow-sm"
+              >
+                <span className="opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">{item.icon}</span>
+                <span>{item.name}</span>
+              </Link>
+            ))}
           </nav>
 
           {/* Right Side */}
@@ -168,33 +193,51 @@ function Header({ settings }: { settings: CafeSettings }) {
             <StatusBadge openHour={settings.openHour} closeHour={settings.closeHour} />
             
             <Link href="/menu" className="hidden sm:block">
-              <Button className="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 shadow-md hover:shadow-lg transition-all">
+              <Button className="bg-gradient-to-r from-amber-500 via-amber-600 to-orange-500 hover:from-amber-600 hover:via-amber-700 hover:to-orange-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-full px-6">
+                <Coffee className="w-4 h-4 mr-2" />
                 Pesan Sekarang
               </Button>
             </Link>
 
-            {/* Mobile Menu */}
-            <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <span className="text-2xl">×</span> : <span className="text-2xl">☰</span>}
-            </Button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 hover:bg-amber-100 transition-colors"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5 text-gray-700" /> : <Menu className="w-5 h-5 text-gray-700" />}
+            </button>
           </div>
         </div>
 
-        {/* Mobile Nav */}
-        {mobileMenuOpen && (
-          <nav className="md:hidden mt-4 pt-4 border-t flex flex-col gap-1 bg-white rounded-2xl p-4 shadow-lg">
-            <Link href="/" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-            <Link href="/#tentang" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Tentang</Link>
-            <Link href="/menu" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Menu</Link>
-            <Link href="/loyalty" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Loyalty</Link>
-            <Link href="/gallery" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Gallery</Link>
-            <Link href="/reservasi" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Reservasi</Link>
-            <Link href="/#lokasi" className="px-4 py-3 text-sm font-medium text-gray-700 rounded-xl hover:bg-amber-100 transition-colors" onClick={() => setMobileMenuOpen(false)}>Lokasi</Link>
-            <Link href="/menu" onClick={() => setMobileMenuOpen(false)}>
-              <Button className="w-full mt-2 bg-gradient-to-r from-amber-600 to-amber-700">Pesan Sekarang</Button>
+        {/* Mobile Nav - Beautiful Dropdown */}
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[500px] opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
+          <nav className="bg-gradient-to-br from-amber-50 via-white to-orange-50 rounded-2xl p-4 shadow-xl border border-amber-100">
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              {navItems.map((item, index) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 p-3 rounded-xl bg-white hover:bg-gradient-to-r hover:from-amber-100 hover:to-orange-100 text-gray-700 hover:text-amber-700 transition-all duration-300 shadow-sm hover:shadow-md group"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
+                    {item.icon}
+                  </div>
+                  <span className="font-medium text-sm">{item.name}</span>
+                </Link>
+              ))}
+            </div>
+            
+            {/* CTA Button */}
+            <Link href="/menu" onClick={() => setMobileMenuOpen(false)} className="block">
+              <Button className="w-full bg-gradient-to-r from-amber-500 via-amber-600 to-orange-500 hover:from-amber-600 hover:via-amber-700 hover:to-orange-600 py-6 rounded-xl shadow-lg text-base font-semibold">
+                <Coffee className="w-5 h-5 mr-2" />
+                Pesan Sekarang
+              </Button>
             </Link>
           </nav>
-        )}
+        </div>
       </div>
     </header>
   )
